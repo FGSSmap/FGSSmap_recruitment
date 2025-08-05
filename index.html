@@ -1,104 +1,134 @@
 <!DOCTYPE html>
-<html lang="ja"
-  <head>
-  <meta charset="UTF-8>
-    <title>FGSSmao/title>
-
-    <!--CSSファイルの読み込み-->
-    <link rel ="stylesheet" href="style.css"
-</html>
-
-<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <title>思い出の場所を募集</title>
   <style>
-    body { font-family: sans-serif; margin: 30px; background-color: #f0f8ff; }
-    h1 { text-align: center; color: #333; }
-    form { max-width: 600px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-    label { display: block; margin-top: 10px; font-weight: bold; }
-    input, textarea { width: 100%; padding: 10px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; }
-    button { margin-top: 20px; padding: 10px 20px; border: none; background-color: #4CAF50; color: white; font-size: 1em; border-radius: 5px; cursor: pointer; }
+    body {
+      font-family: sans-serif;
+      margin: 30px;
+      background-color: #f0f8ff;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      padding: 30px 10px;
+      background-color: #e3f2fd;
+    }
+
+    header img {
+      width: 48px;
+      height: 48px;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      margin: 0;
+      color: #1976d2;
+    }
+
+    header p {
+      font-size: 1.2em;
+      color: #444;
+    }
+
+    .intro {
+      background-color: #e0f7fa;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+    }
+
+    .intro h2 {
+      color: #00796b;
+      margin: 0 0 10px;
+    }
+
+    .intro p {
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: #333;
+      margin: 0;
+    }
+
+    .embed-section {
+      max-width: 800px;
+      margin: 0 auto 50px;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .embed-section h2 {
+      color: #1976d2;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .map-instruction {
+      text-align: center;
+      font-size: 1.1em;
+      color: #333;
+      margin: 40px 0;
+    }
+
+    #map {
+      height: 500px;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
   </style>
 </head>
 <body>
-<header style="display: flex; align-items: center; justify-content: center; gap: 15px; padding: 30px 10px; background-color:#e3f2fd;">
-  <img src="icon.png" alt="アイコン" style="width:48px; height:48px;">
-  <div>
-    <h1 style="font-size:2.5em; margin:0; color:#1976d2;">FGSSmap 〜あなたの記憶を地図にのせて〜</h1>
-    <p style="font-size:1.2em; color:#444;">大学生活のかけがえのない瞬間を、地図とともに共有しよう。</p>
+  <header>
+    <img src="icon.png" alt="アイコン">
+    <div>
+      <h1>FGSSmap 〜あなたの記憶を地図にのせて〜</h1>
+      <p>大学生活のかけがえのない瞬間を、地図とともに共有しよう。</p>
+    </div>
+  </header>
+
+  <section class="intro">
+    <h2>思い出アンケートのご案内</h2>
+    <p>
+      このアンケートは、みなさんの大学生活の記憶や感情をFGSSmapの地図上に残すことで、
+      未来の学生や地域の人々に豊かな物語を届けることを目的としています。<br>
+      思い出の場所やエピソードは、きっと誰かの共感や発見につながります。
+      ぜひ、あなたの「記憶の風景」を教えてください。
+    </p>
+  </section>
+
+  <section class="embed-section">
+    <h2>Googleフォームから投稿する</h2>
+    <iframe
+      src="https://docs.google.com/forms/d/e/1FAIpQLSe0gRhDPJqWI135kZ5fxR1-XkW7IWvzrTaw00cFOyg1KJM36A/viewform?embedded=true"
+      width="100%"
+      height="1372"
+      frameborder="0"
+      marginheight="0"
+      marginwidth="0">
+      読み込んでいます…
+    </iframe>
+  </section>
+
+  <p class="map-instruction">
+    あなたが投稿したものは、以下の地図上に、思い出の場所として記録されます！
+  </p>
+
+  <div id="map">
+    <iframe
+      src="https://www.google.com/maps/d/u/3/embed?mid=1lHF6LV4WDXv1oCXPZeAhkzWfcxePRbA&hl=ja"
+      width="100%"
+      height="100%"
+      style="border:0;"
+      allowfullscreen
+      loading="lazy">
+    </iframe>
   </div>
-</header>
-  <header style="background-color:#e0f7fa; padding: 20px; border-radius: 10px; margin-bottom: 30px;">
-  <h2 style="color:#00796b;">思い出アンケートのご案内</h2>
-  <p style="font-size: 1.1em; line-height: 1.6; color:#333;">
-    このアンケートは、みなさんの大学生活の記憶や感情をFGSSmapの地図上に残すことで、未来の学生や地域の人々に豊かな物語を届けることを目的としています。<br>
-    思い出の場所やエピソードは、きっと誰かの共感や発見につながります。ぜひ、あなたの「記憶の風景」を教えてください。
-  </p>
-</header>
-  <h1>あなたの思い出の場所を教えてください！</h1>
-  <form method="POST" action="#">
-        <label for="author">投稿者のお名前（ニックネームOK）</label>
-    <input type="text" id="author" name="author" placeholder="例：やまぐち太郎" required>
-    
-        <label for="faculty">学部・学科名</label>
-<input type="text" id="faculty" name="faculty" placeholder="例：国際総合科学部　国際総合科学科" required>
-    
-    <label for="title">場所の名前</label>
-<input type="text" id="title" name="title" placeholder="例：FAVO" required>
-
-    <label for="description">思い出のエピソード・特徴</label>
-    <textarea id="description" name="description" rows="4" required></textarea>
-
-    <label for="photo">思い出の写真（URLまたはアップロード）</label>
-    <input type="file" id="photo" name="photo" accept="image/*">
-
-    <button type="submit">投稿する</button>
-  </form>
 </body>
 </html>
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>思い出マップ</title>
-  <style>
-    #map { height: 400px; width: 100%; margin-bottom: 20px; }
-    form { max-width: 600px; margin: auto; }
-    input, textarea { width: 100%; margin-bottom: 10px; padding: 8px; }
-  </style>
-</div>
-</body>
-</html>
-
-    <label for="map">思い出の場所を地図で確認しましょう</label>
-<div style="width:100%; height:80vh; margin-top: 15px;">
-  <p style="font-size: 1.1em; color: #444; margin-top: 10px;">
-    あなたが投稿した「思い出の場所」は、下記の地図上にピンで表示され、世界中の人々と共有されます。
-  </p>
-  <p style="font-size: 1.1em; color: #444; margin-top: 10px;">
-    地図の右上にある「鍵かっこ」ボタンを押して、あなたの思い出の場所をピン留めで追加してください。
-  </p>
-  <iframe 
-    src="https://www.google.com/maps/d/u/3/embed?mid=1lHF6LV4WDXv1oCXPZeAhkzWfcxePRbA&hl=ja"
-    width="100%" 
-    height="100%" 
-    style="border:0;" 
-    allowfullscreen 
-    loading="lazy">
-  </iframe>
-</div>
-    src="https://www.google.com/maps/d/u/3/embed?mid=1lHF6LV4WDXv1oCXPZeAhkzWfcxePRbA&hl=ja" 
-    width="100%" 
-    height="100%" 
-    style="border:0;" 
-    allowfullscreen 
-    loading="lazy">
-  </iframe>
-</div>
-
-<!--JavaScriptファイルの読み込み-->
-<script src="script.js"></script>
-</body>
-</hyml>
