@@ -51,23 +51,36 @@
     header {
       background-color: var(--primary);
       color: #fff;
-      padding: 2rem 1rem;
+      padding: 1.5rem 1rem;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      gap: 0.5rem;
+      gap: 1rem;
       position: sticky;
       top: 0;
       z-index: 100;
       transition: var(--transition);
     }
-    header h1 {
+
+    /* アイコン画像 */
+    .header-icon {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid #fff;
+    }
+
+    /* テキスト部分 */
+    .header-content {
+      text-align: left;
+    }
+    .header-content h1 {
       font-size: 2rem;
       line-height: 1.2;
     }
-    header p {
+    .header-content p {
       font-size: 1rem;
       opacity: 0.85;
     }
@@ -94,7 +107,6 @@
     }
     .intro p {
       font-size: 1.1rem;
-      /* 段落は読みやすく左揃え */
       text-align: left;
     }
 
@@ -146,8 +158,16 @@
 </head>
 <body>
   <header>
-    <h1>FGSSmap</h1>
-    <p>大学生活の思い出を地図にのせよう</p>
+    <!-- ここにアイコン画像を配置 -->
+    <img
+      src="path/to/your-icon.png"
+      alt="FGSSmap アイコン"
+      class="header-icon"
+    />
+    <div class="header-content">
+      <h1>FGSSmap</h1>
+      <p>大学生活の思い出を地図にのせよう</p>
+    </div>
   </header>
 
   <section class="intro">
