@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FGSSmap 完全版</title>
 
-  <!-- ベースURLを明示 -->
-  <base href="./">
-
   <!-- ベーススタイル -->
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
@@ -34,7 +31,6 @@
       scroll-behavior: smooth;
     }
 
-    /* ヘッダー */
     header {
       background: var(--primary);
       color: #fff;
@@ -49,7 +45,6 @@
       transition: var(--transition);
     }
 
-    /* アイコン画像 */
     header img {
       width: 56px;
       height: 56px;
@@ -68,6 +63,7 @@
       opacity: 0.85;
     }
 
+    /* フェードイン用 初期状態 */
     section,
     .map-instruction,
     #map {
@@ -76,6 +72,7 @@
       transition: var(--transition);
     }
 
+    /* 可視化フラグ */
     .visible {
       opacity: 1;
       transform: translateY(0);
@@ -99,12 +96,14 @@
       margin-bottom: 2rem;
     }
 
+    /* フォーム埋め込み */
     .embed-section iframe {
       width: 100%;
       height: 600px;
       border: none;
     }
 
+    /* Instagramセクション */
     .instagram-section {
       max-width: 800px;
       margin: 4rem auto;
@@ -134,12 +133,14 @@
       width: calc(100% - 2rem);
     }
 
+    /* マップ説明テキスト */
     .map-instruction {
       text-align: center;
       font-size: 1.1rem;
       margin: 2rem 0;
     }
 
+    /* Google My Maps 埋め込み */
     #map {
       width: 100%;
       height: 500px;
@@ -149,8 +150,7 @@
 </head>
 <body>
   <header>
-    <!-- 生成アイコンを設定 -->
-    <img src="./new-icon.png" alt="FGSSmap ロゴ">
+    <img src="icon.png" alt="FGSSmap ロゴ">
     <div>
       <h1>FGSSmap</h1>
       <p>大学生活の思い出を地図にのせよう</p>
@@ -199,8 +199,9 @@
   </p>
 
   <div id="map">
+    <!-- 埋め込み用 URL を edit → embed に変更 -->
     <iframe
-      src="https://www.google.com/maps/d/u/0/embed?mid=1lHF6LV4WDXv1oCXPZeAhkzWfcxePRbA&hl=ja"
+      src="https://www.google.com/maps/d/embed?mid=1nTgYFWkXf1UQHwGZCwdXuRv-aopgUkY&hl=ja&ll=34.1569263661782,131.43323404999998&z=13"
       width="100%"
       height="100%"
       style="border:0;"
@@ -212,6 +213,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // フェードインアニメーション
       const targets = document.querySelectorAll('section, .map-instruction, #map');
       const observer = new IntersectionObserver((entries, io) => {
         entries.forEach(entry => {
@@ -223,6 +225,7 @@
       }, { threshold: 0.2 });
       targets.forEach(el => observer.observe(el));
 
+      // スクロールでヘッダーを縮小
       const header = document.querySelector('header');
       let lastScroll = 0;
       window.addEventListener('scroll', () => {
