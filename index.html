@@ -2,22 +2,25 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FGSSmap 完全版</title>
 
-  <!-- ベーススタイル -->
+  <!-- Google Fonts の読み込み -->
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
 
     :root {
-      --primary: #6c63ff;
+      --primary:   #6c63ff;
       --secondary: #ff6584;
-      --bg: #f9f9fc;
-      --text: #333;
+      --bg:        #f9f9fc;
+      --text:      #333333;
+      --accent:    #6c63ff;
       --transition: all 0.6s ease;
     }
 
-    * {
+    /* リセット & ベース */
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -26,13 +29,29 @@
     body {
       font-family: 'Montserrat', sans-serif;
       color: var(--text);
-      background: var(--bg);
+      background-color: var(--bg);
       line-height: 1.6;
       scroll-behavior: smooth;
     }
 
+    /* 共通フェードイン */
+    section,
+    .map-instruction,
+    #map {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: var(--transition);
+    }
+    section.visible,
+    .map-instruction.visible,
+    #map.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ヘッダー */
     header {
-      background: var(--primary);
+      background-color: var(--primary);
       color: #fff;
       padding: 2rem 1rem;
       display: flex;
@@ -44,7 +63,6 @@
       z-index: 100;
       transition: var(--transition);
     }
-
     header img {
       width: 56px;
       height: 56px;
@@ -52,82 +70,74 @@
       border-radius: 50%;
       border: 2px solid #fff;
     }
-
     header h1 {
       font-size: 2rem;
       line-height: 1.2;
     }
-
     header p {
       font-size: 1rem;
       opacity: 0.85;
     }
 
-    /* フェードイン用 初期状態 */
-    section,
-    .map-instruction,
-    #map {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: var(--transition);
-    }
-
-    /* 可視化フラグ */
-    .visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    section {
+    /* 紹介セクション */
+    .intro {
       max-width: 800px;
       margin: 4rem auto;
-      padding: 0 1rem;
+      padding: 2rem;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
     }
-
-    section h2 {
+    .intro h2 {
+      color: var(--secondary);
+      font-weight: 600;
       font-size: 1.75rem;
       margin-bottom: 1rem;
-      color: var(--primary);
     }
-
-    section p {
-      font-size: 1rem;
-      line-height: 1.6;
-      margin-bottom: 2rem;
+    .intro p {
+      font-size: 1.1rem;
     }
 
     /* フォーム埋め込み */
+    .embed-section {
+      max-width: 800px;
+      margin: 3rem auto;
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+    .embed-section h2 {
+      color: var(--primary);
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
     .embed-section iframe {
       width: 100%;
       height: 600px;
       border: none;
+      border-radius: 8px;
     }
 
-    /* Instagramセクション */
+    /* Instagram セクション */
     .instagram-section {
       max-width: 800px;
       margin: 4rem auto;
-      padding: 0 1rem;
+      padding: 2rem 1rem;
       text-align: center;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
     }
-
     .instagram-section h2 {
-      font-size: 1.75rem;
       color: var(--primary);
+      font-size: 1.75rem;
       margin-bottom: 1rem;
     }
-
     .instagram-section p {
-      font-size: 1rem;
-      line-height: 1.6;
       margin-bottom: 2rem;
     }
-
-    .instagram-section blockquote.instagram-media {
-      background: #FFF;
-      border: 0;
-      border-radius: 3px;
-      box-shadow: 0 0 1px rgba(0,0,0,0.1), 0 1px 10px rgba(0,0,0,0.1);
+    blockquote.instagram-media {
       margin: 0 auto;
       max-width: 540px;
       width: calc(100% - 2rem);
@@ -138,13 +148,27 @@
       text-align: center;
       font-size: 1.1rem;
       margin: 2rem 0;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    /* Google My Maps 埋め込み */
+    /* My Maps 埋め込み */
     #map {
       width: 100%;
       height: 500px;
       margin-bottom: 4rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+    #map iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
   </style>
 </head>
@@ -199,12 +223,8 @@
   </p>
 
   <div id="map">
-    <!-- 埋め込み用 URL を edit → embed に変更 -->
     <iframe
-      src="https://www.google.com/maps/d/embed?mid=1nTgYFWkXf1UQHwGZCwdXuRv-aopgUkY&hl=ja&ll=34.1569263661782,131.43323404999998&z=13"
-      width="100%"
-      height="100%"
-      style="border:0;"
+      src="https://www.google.com/maps/d/u/3/embed?mid=1nTgYFWkXf1UQHwGZCwdXuRv-aopgUkY&hl=ja&ll=34.1569263661782,131.43323404999998&z=13"
       allowfullscreen
       loading="lazy"
       title="思い出マップ">
@@ -225,7 +245,7 @@
       }, { threshold: 0.2 });
       targets.forEach(el => observer.observe(el));
 
-      // スクロールでヘッダーを縮小
+      // ヘッダーの縮小トランジション
       const header = document.querySelector('header');
       let lastScroll = 0;
       window.addEventListener('scroll', () => {
