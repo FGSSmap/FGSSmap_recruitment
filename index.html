@@ -142,34 +142,6 @@
       max-width: 540px;
       width: calc(100% - 2rem);
     }
-
-    /* マップ説明テキスト */
-    .map-instruction {
-      text-align: center;
-      font-size: 1.1rem;
-      margin: 2rem 0;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* My Maps 埋め込み */
-    #map {
-      width: 100%;
-      height: 500px;
-      margin-bottom: 4rem;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
-    }
-    #map iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
   </style>
 </head>
 <body>
@@ -218,23 +190,10 @@
     <script async src="https://www.instagram.com/embed.js"></script>
   </section>
 
-  <p class="map-instruction">
-    あなたが投稿したスポットは、以下の地図上に表示されます。
-  </p>
-
-  <div id="map">
-    <iframe
-      src="https://www.google.com/maps/d/u/3/embed?mid=1nTgYFWkXf1UQHwGZCwdXuRv-aopgUkY&hl=ja&ll=34.1569263661782,131.43323404999998&z=13"
-      allowfullscreen
-      loading="lazy"
-      title="思い出マップ">
-    </iframe>
-  </div>
-
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // フェードインアニメーション
-      const targets = document.querySelectorAll('section, .map-instruction, #map');
+      const targets = document.querySelectorAll('section');
       const observer = new IntersectionObserver((entries, io) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
