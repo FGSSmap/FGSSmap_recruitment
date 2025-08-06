@@ -53,9 +53,11 @@
       color: #fff;
       padding: 2rem 1rem;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 1rem;
+      text-align: center;
+      gap: 0.5rem;
       position: sticky;
       top: 0;
       z-index: 100;
@@ -68,6 +70,11 @@
     header p {
       font-size: 1rem;
       opacity: 0.85;
+    }
+
+    /* セクション見出しを中央揃え */
+    section h2 {
+      text-align: center;
     }
 
     /* 紹介セクション */
@@ -87,6 +94,8 @@
     }
     .intro p {
       font-size: 1.1rem;
+      /* 段落は読みやすく左揃え */
+      text-align: left;
     }
 
     /* フォーム埋め込み */
@@ -137,10 +146,8 @@
 </head>
 <body>
   <header>
-    <div>
-      <h1>FGSSmap</h1>
-      <p>大学生活の思い出を地図にのせよう</p>
-    </div>
+    <h1>FGSSmap</h1>
+    <p>大学生活の思い出を地図にのせよう</p>
   </header>
 
   <section class="intro">
