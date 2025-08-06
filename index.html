@@ -36,15 +36,13 @@
 
     /* 共通フェードイン */
     section,
-    .map-instruction,
-    #map {
+    .map-instruction {
       opacity: 0;
       transform: translateY(30px);
       transition: var(--transition);
     }
     section.visible,
-    .map-instruction.visible,
-    #map.visible {
+    .map-instruction.visible {
       opacity: 1;
       transform: translateY(0);
     }
@@ -62,13 +60,6 @@
       top: 0;
       z-index: 100;
       transition: var(--transition);
-    }
-    header img {
-      width: 56px;
-      height: 56px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 2px solid #fff;
     }
     header h1 {
       font-size: 2rem;
@@ -146,7 +137,6 @@
 </head>
 <body>
   <header>
-    <img src="icon.png" alt="FGSSmap ロゴ">
     <div>
       <h1>FGSSmap</h1>
       <p>大学生活の思い出を地図にのせよう</p>
