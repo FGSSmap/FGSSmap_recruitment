@@ -64,24 +64,19 @@
       opacity: 0.85;
     }
 
-    section,
-    .map-instruction,
-    #map {
+    section {
       opacity: 0;
       transform: translateY(30px);
       transition: var(--transition);
+      max-width: 800px;
+      margin: 4rem auto;
+      padding: 0 1rem;
+      text-align: center;
     }
 
     .visible {
       opacity: 1;
       transform: translateY(0);
-    }
-
-    section {
-      max-width: 800px;
-      margin: 4rem auto;
-      padding: 0 1rem;
-      text-align: center;
     }
 
     section h2 {
@@ -129,23 +124,6 @@
       margin: 0 auto;
       max-width: 540px;
       width: calc(100% - 2rem);
-    }
-
-    .map-instruction {
-      text-align: center;
-      font-size: 1.1rem;
-      margin: 2rem 0;
-    }
-
-    #map iframe {
-      width: 100%;
-      height: 500px;
-      border: none;
-    }
-
-    #map {
-      max-width: 800px;
-      margin: 0 auto 4rem;
     }
   </style>
 </head>
@@ -195,21 +173,9 @@
     <script async src="https://www.instagram.com/embed.js"></script>
   </section>
 
-  <p class="map-instruction">
-    あなたが投稿したスポットは、以下の地図上に表示されます。
-  </p>
-
-  <div id="map">
-    <iframe
-      src="https://www.google.com/maps/d/u/0/embed?mid=1lHF6LV4WDXv1oCXPZeAhkzWfcxePRbA&hl=ja"
-      loading="lazy"
-      title="思い出マップ">
-    </iframe>
-  </div>
-
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const targets = document.querySelectorAll('section, .map-instruction, #map');
+      const targets = document.querySelectorAll('section');
       const observer = new IntersectionObserver((entries, io) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
