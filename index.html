@@ -91,7 +91,8 @@
       margin-bottom: 2rem;
     }
 
-    .embed-section iframe {
+    .embed-section iframe,
+    .map-section iframe {
       width: 100%;
       height: 600px;
       border: none;
@@ -126,7 +127,6 @@
       width: calc(100% - 2rem);
     }
 
-    /* ここからマップセクション用のスタイル */
     .map-section {
       max-width: 800px;
       margin: 4rem auto;
@@ -140,16 +140,16 @@
       margin-bottom: 1rem;
     }
 
-    .map-section iframe {
-      width: 100%;
-      height: 600px;
-      border: none;
+    .map-section p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="C:\Users\ryoga\OneDrive\デスクトップ\Palt's\AnyConv.com__FGSSmap_アイコン_PNG.png" alt="FGSSmap ロゴ">
+    <img src="images/FGSSmap_icon.png" alt="FGSSmap ロゴ" width="56" height="56" loading="lazy">
     <div>
       <h1>FGSSmap</h1>
       <p>大学生活の思い出を地図にのせよう</p>
@@ -193,9 +193,9 @@
     <script async src="https://www.instagram.com/embed.js"></script>
   </section>
 
-  <!-- ここからマップ埋め込みセクション -->
   <section class="map-section">
     <h2>FGSSmap</h2>
+    <p>みなさんの思い出の場所は以下の地図上に記録され、世界中の人に共有されます！</p>
     <iframe
       src="https://www.google.com/maps/d/embed?mid=1nTgYFWkXf1UQHwGZCwdXuRv-aopgUkY&hl=ja&ll=34.12380329442955,131.43323404999998&z=13"
       loading="lazy"
