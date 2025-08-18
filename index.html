@@ -47,14 +47,6 @@
       text-align: center;
     }
 
-    header img {
-      width: 300px;
-      height: auto;
-      object-fit: contain;
-      border: none;
-      border-radius: 0;
-    }
-
     header h1 {
       font-size: 2rem;
       line-height: 1.2;
@@ -136,12 +128,19 @@
       opacity: 0.8;
       transform: translateY(-50%) scale(1.1);
     }
+
+    @media (max-width: 600px) {
+      .social-icon {
+        top: auto;
+        bottom: 1rem;
+        transform: none;
+      }
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <img src="images/AnyConv.com__FGSSmap_アイコン_PNG.png" alt="">
     <div>
       <h1>FGSSmap</h1>
       <p>大学生活の思い出を地図にのせよう</p>
