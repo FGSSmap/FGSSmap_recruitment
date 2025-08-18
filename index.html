@@ -7,12 +7,13 @@
   <base href="./">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous" referrerpolicy="no-referrer">
-
   <style>
     :root {
       --primary: #6c63ff;
       --secondary: #ff6584;
-      --bg: #f9f9fc;
+      --bg: #faf8ff;
+      --section-bg: #ffffff;
+      --section-alt-bg: #f4f0ff;
       --text: #333;
       --transition: all 0.6s ease;
     }
@@ -25,8 +26,8 @@
 
     body {
       font-family: 'Montserrat', sans-serif;
-      color: var(--text);
       background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
       scroll-behavior: smooth;
     }
@@ -35,16 +36,11 @@
       background: var(--primary);
       color: #fff;
       padding: 2rem 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
+      text-align: center;
       position: sticky;
       top: 0;
       z-index: 100;
       transition: var(--transition);
-      text-align: center;
     }
 
     header h1 {
@@ -58,13 +54,21 @@
     }
 
     section {
+      max-width: 800px;
+      margin: 3rem auto;
+      padding: 2rem 1rem;
+      background: var(--section-bg);
+      border-left: 4px solid var(--primary);
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
       opacity: 0;
       transform: translateY(30px);
       transition: var(--transition);
-      max-width: 800px;
-      margin: 4rem auto;
-      padding: 0 1rem;
       text-align: center;
+    }
+
+    section:nth-of-type(even) {
+      background: var(--section-alt-bg);
     }
 
     .visible {
@@ -75,13 +79,26 @@
     section h2 {
       font-size: 1.75rem;
       margin-bottom: 1rem;
+      position: relative;
       color: var(--primary);
+      padding-bottom: 0.5rem;
+    }
+
+    section h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 4px;
+      background: var(--secondary);
+      border-radius: 2px;
     }
 
     section p {
       font-size: 1rem;
-      line-height: 1.6;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
 
     .embed-section iframe,
@@ -89,28 +106,19 @@
       width: 100%;
       height: 600px;
       border: none;
-    }
-
-    .instagram-section,
-    .map-section {
-      max-width: 800px;
-      margin: 4rem auto;
-      padding: 0 1rem;
-      text-align: center;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
     }
 
     .instagram-section blockquote.instagram-media {
       background: #FFF;
       border: 0;
-      border-radius: 3px;
-      box-shadow: 0 0 1px rgba(0,0,0,0.1), 0 1px 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
       margin: 0 auto;
       max-width: 540px;
       width: calc(100% - 2rem);
-    }
-
-    .intro {
-      position: relative;
+      padding: 1rem;
     }
 
     .social-icon {
@@ -118,15 +126,14 @@
       top: 50%;
       right: 1rem;
       transform: translateY(-50%);
-      z-index: 999;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      color: #e1306c;
+      color: var(--primary);
       font-size: 2.4rem;
+      z-index: 999;
+      transition: var(--transition);
     }
 
     .social-icon:hover {
-      opacity: 0.8;
-      transform: translateY(-50%) scale(1.1);
+      color: var(--secondary);
     }
 
     @media (max-width: 600px) {
@@ -141,10 +148,8 @@
 <body>
 
   <header>
-    <div>
-      <h1>FGSSmap</h1>
-      <p>大学生活の思い出を地図にのせよう</p>
-    </div>
+    <h1>FGSSmap</h1>
+    <p>大学生活の思い出を地図にのせよう</p>
   </header>
 
   <section class="intro">
@@ -196,7 +201,9 @@
 
   <section class="map-section">
     <h2>FGSSmap</h2>
-    <p>みなさんの思い出の場所は以下の地図上に記録され、世界中に共有されます！</p>
+    <p>
+      みなさんの思い出の場所は以下の地図上に記録され、世界中に共有されます！
+    </p>
     <iframe
       src="https://www.google.com/maps/d/embed?mid=1nTgYFWkXf1UQHwGZCwdXuRv-aopgUkY&hl=ja&ll=34.12380329442955,131.43323404999998&z=13"
       loading="lazy"
@@ -206,16 +213,16 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const targets = document.querySelectorAll('section');
-      const observer = new IntersectionObserver((entries, io) => {
+      const sections = document.querySelectorAll('section');
+      const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            io.unobserve(entry.target);
+            obs.unobserve(entry.target);
           }
         });
       }, { threshold: 0.2 });
-      targets.forEach(el => observer.observe(el));
+      sections.forEach(sec => observer.observe(sec));
 
       const header = document.querySelector('header');
       let lastScroll = 0;
