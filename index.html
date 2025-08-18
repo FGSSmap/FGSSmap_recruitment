@@ -6,6 +6,7 @@
   <title>FGSSmap 完全版</title>
   <base href="./">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous" referrerpolicy="no-referrer">
 
   <style>
     :root {
@@ -47,11 +48,11 @@
     }
 
     header img {
-      width: 56px;
-      height: 56px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 2px solid #fff;
+      width: 300px;
+      height: auto;
+      object-fit: contain;
+      border: none;
+      border-radius: 0;
     }
 
     header h1 {
@@ -98,23 +99,12 @@
       border: none;
     }
 
-    .instagram-section {
+    .instagram-section,
+    .map-section {
       max-width: 800px;
       margin: 4rem auto;
       padding: 0 1rem;
       text-align: center;
-    }
-
-    .instagram-section h2 {
-      font-size: 1.75rem;
-      color: var(--primary);
-      margin-bottom: 1rem;
-    }
-
-    .instagram-section p {
-      font-size: 1rem;
-      line-height: 1.6;
-      margin-bottom: 2rem;
     }
 
     .instagram-section blockquote.instagram-media {
@@ -127,29 +117,27 @@
       width: calc(100% - 2rem);
     }
 
-    .map-section {
-      max-width: 800px;
-      margin: 4rem auto;
-      padding: 0 1rem;
-      text-align: center;
+    .social-icon {
+      position: fixed;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 200;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      color: #e1306c;
+      font-size: 2.4rem;
     }
 
-    .map-section h2 {
-      font-size: 1.75rem;
-      color: var(--primary);
-      margin-bottom: 1rem;
-    }
-
-    .map-section p {
-      font-size: 1rem;
-      line-height: 1.6;
-      margin-bottom: 2rem;
+    .social-icon:hover {
+      opacity: 0.8;
+      transform: translateY(-50%) scale(1.1);
     }
   </style>
 </head>
 <body>
+
   <header>
-    <img src="https://drive.google.com/uc?export=view&id=1_6c4tXbQzeyoGPP5y2svt0gKhhlODpFj" alt="FGSSmap ロゴ">
+    <img src="images/AnyConv.com__FGSSmap_アイコン_PNG.png" alt="">
     <div>
       <h1>FGSSmap</h1>
       <p>大学生活の思い出を地図にのせよう</p>
@@ -202,6 +190,16 @@
       title="FGSSmap 地図">
     </iframe>
   </section>
+
+  <a
+    href="https://www.instagram.com/palets_fgss/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="social-icon"
+    aria-label="Palet’s Instagram"
+  >
+    <i class="fab fa-instagram"></i>
+  </a>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
