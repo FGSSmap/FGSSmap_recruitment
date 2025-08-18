@@ -122,10 +122,11 @@
     }
 
     .social-icon {
-      position: absolute;
-      top: 1rem;
+      position: fixed;
+      top: 50%;
       right: 1rem;
-      z-index: 200;
+      transform: translateY(-50%);
+      z-index: 999;
       transition: opacity 0.3s ease, transform 0.3s ease;
       color: #e1306c;
       font-size: 2.4rem;
@@ -133,7 +134,7 @@
 
     .social-icon:hover {
       opacity: 0.8;
-      transform: scale(1.1);
+      transform: translateY(-50%) scale(1.1);
     }
   </style>
 </head>
@@ -153,16 +154,17 @@
       ここではあなたの大学生活で訪れた場所や思い出をフォームから投稿し、地図上に記録します。
       みんなの記憶が一つの地図となって広がっていきます。
     </p>
-    <a
-      href="https://www.instagram.com/palets_fgss/"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="social-icon"
-      aria-label="Palet’s Instagram"
-    >
-      <i class="fab fa-instagram"></i>
-    </a>
   </section>
+
+  <a
+    href="https://www.instagram.com/palets_fgss/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="social-icon"
+    aria-label="Palet’s Instagram"
+  >
+    <i class="fab fa-instagram"></i>
+  </a>
 
   <section class="embed-section">
     <h2>思い出を投稿する</h2>
