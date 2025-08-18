@@ -117,11 +117,14 @@
       width: calc(100% - 2rem);
     }
 
+    .intro {
+      position: relative;
+    }
+
     .social-icon {
-      position: fixed;
+      position: absolute;
+      top: 1rem;
       right: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
       z-index: 200;
       transition: opacity 0.3s ease, transform 0.3s ease;
       color: #e1306c;
@@ -130,7 +133,7 @@
 
     .social-icon:hover {
       opacity: 0.8;
-      transform: translateY(-50%) scale(1.1);
+      transform: scale(1.1);
     }
   </style>
 </head>
@@ -150,6 +153,15 @@
       ここではあなたの大学生活で訪れた場所や思い出をフォームから投稿し、地図上に記録します。
       みんなの記憶が一つの地図となって広がっていきます。
     </p>
+    <a
+      href="https://www.instagram.com/palets_fgss/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="social-icon"
+      aria-label="Palet’s Instagram"
+    >
+      <i class="fab fa-instagram"></i>
+    </a>
   </section>
 
   <section class="embed-section">
@@ -190,16 +202,6 @@
       title="FGSSmap 地図">
     </iframe>
   </section>
-
-  <a
-    href="https://www.instagram.com/palets_fgss/"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="social-icon"
-    aria-label="Palet’s Instagram"
-  >
-    <i class="fab fa-instagram"></i>
-  </a>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
