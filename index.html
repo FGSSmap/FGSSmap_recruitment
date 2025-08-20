@@ -23,16 +23,16 @@
       --text: #333;
       --transition: all 0.3s ease;
     }
-    
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    html.font-small { font-size: 14px; }
+    html.font-small  { font-size: 14px; }
     html.font-medium { font-size: 16px; }
-    html.font-large { font-size: 18px; }
+    html.font-large  { font-size: 18px; }
 
     body {
       font-family: 'Montserrat', sans-serif;
@@ -42,6 +42,7 @@
       scroll-behavior: smooth;
     }
 
+    /* ライトボックス */
     .lightbox-overlay {
       display: none;
       position: fixed;
@@ -66,11 +67,12 @@
       top: 1rem; right: 1rem;
       font-size: 2rem;
       color: #fff;
-      cursor: pointer;
       background: none;
       border: none;
+      cursor: pointer;
     }
 
+    /* ヘッダー */
     header {
       background: var(--primary);
       color: #fff;
@@ -79,11 +81,8 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      transition:
-        padding var(--transition),
-        transform var(--transition),
-        opacity var(--transition);
-      will-change: padding, transform, opacity;
+      transform-origin: top center;
+      transition: opacity var(--transition);
     }
 
     .header-top {
@@ -96,24 +95,19 @@
       max-width: 60px;
       height: auto;
       cursor: pointer;
+      transition: transform 0.2s ease;
     }
 
-    header.shrink {
-      padding: 0.8rem 1rem;
+    header h1 {
+      font-size: 2rem;
+      line-height: 1.2;
     }
-    header.shrink .logo {
-      max-width: 45px;
-    }
-    header.shrink h1 {
-      font-size: 1.4rem;
-    }
-    header.shrink p {
-      font-size: 0.9rem;
-    }
-    header.shrink .font-size-controls {
-      transform: scale(0.85);
+    header p {
+      font-size: 1rem;
+      opacity: 0.85;
     }
 
+    /* フォントサイズ切替 */
     .font-size-controls {
       margin-top: 0.5rem;
       display: inline-flex;
@@ -121,7 +115,6 @@
       background: rgba(255,255,255,0.2);
       padding: 0.3rem;
       border-radius: 999px;
-      transition: transform var(--transition);
     }
     .font-size-controls button {
       background: transparent;
@@ -141,15 +134,7 @@
       color: var(--primary);
     }
 
-    header h1 {
-      font-size: 2rem;
-      line-height: 1.2;
-    }
-    header p {
-      font-size: 1rem;
-      opacity: 0.85;
-    }
-
+    /* 固定ソーシャルリンク */
     .fixed-buttons {
       position: fixed;
       top: 50%;
@@ -163,12 +148,13 @@
     .fixed-buttons a {
       color: var(--primary);
       font-size: 2.4rem;
-      transition: var(--transition);
+      transition: color var(--transition);
     }
     .fixed-buttons a:hover {
       color: var(--secondary);
     }
 
+    /* セクション共通 */
     section {
       max-width: 800px;
       margin: 3rem auto;
@@ -189,7 +175,6 @@
       opacity: 1;
       transform: translateY(0);
     }
-
     section h2 {
       font-size: 1.75rem;
       margin-bottom: 1rem;
@@ -256,7 +241,7 @@
     <img class="lightbox-img" src="" alt="拡大画像">
   </div>
 
-  <header>
+  <header id="js-header">
     <div class="header-top">
       <img
         src="FGSSmap-icon.png.png"
@@ -282,17 +267,13 @@
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Palet’s Instagram"
-    >
-      <i class="fab fa-instagram"></i>
-    </a>
+    ><i class="fab fa-instagram"></i></a>
     <a
       href="https://www.yamaguchi-u.ac.jp/gss/index.html"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="山口大学国際総合科学部公式サイト"
-    >
-      <i class="fas fa-university"></i>
-    </a>
+    ><i class="fas fa-university"></i></a>
   </div>
 
   <section class="intro">
@@ -325,9 +306,7 @@
         href="https://www.instagram.com/palets_fgss/?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
         target="_blank"
         rel="noopener"
-      >
-        Palet's (@palets_fgss) • Instagram写真と動画
-      </a>
+      >Palet's (@palets_fgss) • Instagram写真と動画</a>
     </blockquote>
     <script async src="https://www.instagram.com/embed.js"></script>
   </section>
@@ -346,6 +325,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // セクションふわっと表示
       const sections = document.querySelectorAll('section');
       const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
@@ -357,17 +337,10 @@
       }, { threshold: 0.2 });
       sections.forEach(sec => observer.observe(sec));
 
-      const header = document.querySelector('header');
-      const threshold = 100;
-      window.addEventListener('scroll', () => {
-        header.classList.toggle('shrink', window.pageYOffset > threshold);
-      });
-
+      // フォントサイズ切替 + 永続化
       const buttons = document.querySelectorAll('.font-size-controls button');
       const applySize = size => {
-        document.documentElement.classList.remove(
-          'font-small','font-medium','font-large'
-        );
+        document.documentElement.classList.remove('font-small','font-medium','font-large');
         document.documentElement.classList.add(`font-${size}`);
       };
       const saved = localStorage.getItem('fontSize') || 'medium';
@@ -382,22 +355,34 @@
         });
       });
 
-      const logo = document.getElementById('js-logo');
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImg = lightbox.querySelector('.lightbox-img');
-      const closeBtn = lightbox.querySelector('.lightbox-close');
-
+      // ライトボックス
+      const logo      = document.getElementById('js-logo');
+      const lightbox  = document.getElementById('lightbox');
+      const lightboxImg  = lightbox.querySelector('.lightbox-img');
+      const closeBtn     = lightbox.querySelector('.lightbox-close');
       logo.addEventListener('click', () => {
         lightboxImg.src = logo.src;
         lightbox.classList.add('show');
       });
-      closeBtn.addEventListener('click', () => {
-        lightbox.classList.remove('show');
-      });
+      closeBtn.addEventListener('click', () => lightbox.classList.remove('show'));
       lightbox.addEventListener('click', e => {
-        if (e.target === lightbox) {
-          lightbox.classList.remove('show');
-        }
+        if (e.target === lightbox) lightbox.classList.remove('show');
+      });
+
+      // ヘッダーの縮小 + 半透明化
+      const header     = document.getElementById('js-header');
+      const threshold  = 100;   // 0〜threshold(px)で最小スケールまで
+      const minScale   = 0.85;  // 縮小後のスケール
+      const minBgAlpha = 0.6;   // 縮小後の背景α値
+      // 初期背景をRGBAでセット
+      header.style.backgroundColor = 'rgba(108, 99, 255, 1)';
+      window.addEventListener('scroll', () => {
+        const y     = window.pageYOffset;
+        const ratio = Math.min(y / threshold, 1);
+        const scale = 1 - (1 - minScale) * ratio;
+        const alpha = 1 - (1 - minBgAlpha) * ratio;
+        header.style.transform        = `scale(${scale})`;
+        header.style.backgroundColor  = `rgba(108, 99, 255, ${alpha})`;
       });
     });
   </script>
