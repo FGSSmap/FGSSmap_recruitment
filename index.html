@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FGSSmap 完全版</title>
   <base href="./">
   <link
@@ -44,6 +44,36 @@
       scroll-behavior: smooth;
     }
 
+    /* Lightbox オーバーレイ */
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1100;
+    }
+    .lightbox-overlay.show {
+      display: flex;
+    }
+    .lightbox-img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
     /* ヘッダー */
     header {
       background: var(--primary);
@@ -52,7 +82,7 @@
       text-align: center;
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
       transition:
         padding var(--transition),
         transform var(--transition),
@@ -67,10 +97,10 @@
       justify-content: center;
       gap: 0.5rem;
     }
-
     .logo {
       max-width: 60px;
       height: auto;
+      cursor: pointer;
     }
 
     /* 縮小後のスタイル */
@@ -179,11 +209,9 @@
     section h2::after {
       content: '';
       position: absolute;
-      bottom: 0;
-      left: 50%;
+      bottom: 0; left: 50%;
       transform: translateX(-50%);
-      width: 50px;
-      height: 4px;
+      width: 50px; height: 4px;
       background: var(--secondary);
       border-radius: 2px;
     }
@@ -223,7 +251,6 @@
         flex-direction: row;
         gap: 0.5rem;
       }
-      /* モバイルでは縦並びに戻す */
       .header-top {
         flex-direction: column;
         gap: 0.25rem;
@@ -233,6 +260,12 @@
 </head>
 <body>
 
+  <!-- Lightbox オーバーレイ -->
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" aria-label="閉じる">&times;</button>
+    <img class="lightbox-img" src="" alt="拡大画像">
+  </div>
+
   <header>
     <div class="header-top">
       <img
@@ -240,6 +273,7 @@
         alt="FGSSmap ロゴアイコン"
         class="logo"
         loading="lazy"
+        id="js-logo"
       >
       <h1>FGSSmap</h1>
     </div>
@@ -275,8 +309,8 @@
   <section class="intro">
     <h2>FGSSmapへようこそ</h2>
     <p>
-      ここではあなたの大学生活で訪れた場所や思い出をフォームから投稿し、地図上に記録します。
-      みんなの記憶が一つの地図となって広がっていきます。
+      ここではあなたの大学生活で訪れた場所や思い出をフォームから投稿し、
+      地図上に記録します。みんなの記憶が一つの地図となって広がっていきます。
     </p>
   </section>
 
@@ -286,9 +320,7 @@
       src="https://docs.google.com/forms/d/e/1FAIpQLSe0gRhDPJqWI135kZ5fxR1-XkW7IWvzrTaw00cFOyg1KJM36A/viewform?embedded=true"
       loading="lazy"
       title="思い出投稿フォーム"
-    >
-      読み込んでいます…
-    </iframe>
+    ></iframe>
   </section>
 
   <section class="instagram-section">
@@ -304,7 +336,6 @@
         href="https://www.instagram.com/palets_fgss/?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
         target="_blank"
         rel="noopener"
-        style="color:#000; font-family:Arial,sans-serif; font-size:14px; line-height:17px; text-decoration:none;"
       >
         Palet's (@palets_fgss) • Instagram写真と動画
       </a>
@@ -342,16 +373,15 @@
       const header = document.querySelector('header');
       const threshold = 100;
       window.addEventListener('scroll', () => {
-        const scrollY = window.pageYOffset;
-        header.classList.toggle('shrink', scrollY > threshold);
+        header.classList.toggle('shrink', window.pageYOffset > threshold);
       });
 
       // フォントサイズ切り替え
       const buttons = document.querySelectorAll('.font-size-controls button');
       const applySize = size => {
-        document.documentElement
-          .classList
-          .remove('font-small','font-medium','font-large');
+        document.documentElement.classList.remove(
+          'font-small','font-medium','font-large'
+        );
         document.documentElement.classList.add(`font-${size}`);
       };
       const saved = localStorage.getItem('fontSize') || 'medium';
@@ -364,6 +394,25 @@
           applySize(btn.dataset.size);
           localStorage.setItem('fontSize', btn.dataset.size);
         });
+      });
+
+      // Lightbox トグル
+      const logo = document.getElementById('js-logo');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = lightbox.querySelector('.lightbox-img');
+      const closeBtn = lightbox.querySelector('.lightbox-close');
+
+      logo.addEventListener('click', () => {
+        lightboxImg.src = logo.src;
+        lightbox.classList.add('show');
+      });
+      closeBtn.addEventListener('click', () => {
+        lightbox.classList.remove('show');
+      });
+      lightbox.addEventListener('click', e => {
+        if (e.target === lightbox) {
+          lightbox.classList.remove('show');
+        }
       });
     });
   </script>
