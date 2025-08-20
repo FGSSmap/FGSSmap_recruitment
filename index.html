@@ -14,7 +14,6 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer">
   <style>
-    /* カラーパレット */
     :root {
       --primary: #6c63ff;
       --secondary: #ff6584;
@@ -24,8 +23,7 @@
       --text: #333;
       --transition: all 0.3s ease;
     }
-
-    /* リセット */
+    
     * {
       box-sizing: border-box;
       margin: 0;
@@ -44,7 +42,6 @@
       scroll-behavior: smooth;
     }
 
-    /* Lightbox オーバーレイ */
     .lightbox-overlay {
       display: none;
       position: fixed;
@@ -74,7 +71,6 @@
       border: none;
     }
 
-    /* ヘッダー */
     header {
       background: var(--primary);
       color: #fff;
@@ -90,7 +86,6 @@
       will-change: padding, transform, opacity;
     }
 
-    /* ロゴ＋タイトルを横並びに */
     .header-top {
       display: flex;
       align-items: center;
@@ -103,7 +98,6 @@
       cursor: pointer;
     }
 
-    /* 縮小後のスタイル */
     header.shrink {
       padding: 0.8rem 1rem;
     }
@@ -120,7 +114,6 @@
       transform: scale(0.85);
     }
 
-    /* フォントサイズ切替ピルボタン */
     .font-size-controls {
       margin-top: 0.5rem;
       display: inline-flex;
@@ -157,7 +150,6 @@
       opacity: 0.85;
     }
 
-    /* 常駐アイコン群 */
     .fixed-buttons {
       position: fixed;
       top: 50%;
@@ -177,7 +169,6 @@
       color: var(--secondary);
     }
 
-    /* セクション共通 */
     section {
       max-width: 800px;
       margin: 3rem auto;
@@ -260,7 +251,6 @@
 </head>
 <body>
 
-  <!-- Lightbox オーバーレイ -->
   <div class="lightbox-overlay" id="lightbox">
     <button class="lightbox-close" aria-label="閉じる">&times;</button>
     <img class="lightbox-img" src="" alt="拡大画像">
@@ -286,7 +276,6 @@
     </div>
   </header>
 
-  <!-- 常駐アイコン -->
   <div class="fixed-buttons" role="navigation" aria-label="ソーシャルリンク">
     <a
       href="https://www.instagram.com/palets_fgss/"
@@ -357,7 +346,6 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // セクションのフェードイン
       const sections = document.querySelectorAll('section');
       const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
@@ -369,14 +357,12 @@
       }, { threshold: 0.2 });
       sections.forEach(sec => observer.observe(sec));
 
-      // ヘッダー縮小エフェクト
       const header = document.querySelector('header');
       const threshold = 100;
       window.addEventListener('scroll', () => {
         header.classList.toggle('shrink', window.pageYOffset > threshold);
       });
 
-      // フォントサイズ切り替え
       const buttons = document.querySelectorAll('.font-size-controls button');
       const applySize = size => {
         document.documentElement.classList.remove(
@@ -396,7 +382,6 @@
         });
       });
 
-      // Lightbox トグル
       const logo = document.getElementById('js-logo');
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = lightbox.querySelector('.lightbox-img');
