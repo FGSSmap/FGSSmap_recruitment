@@ -13,7 +13,6 @@
     rel="stylesheet"
     crossorigin="anonymous"
     referrerpolicy="no-referrer">
-
   <style>
     /* カラーパレット */
     :root {
@@ -54,17 +53,41 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      transition: var(--transition);
+      transition:
+        padding var(--transition),
+        transform var(--transition),
+        opacity var(--transition);
+      will-change: padding, transform, opacity;
     }
 
-    /* ロゴ */
+    /* ロゴ＋タイトルを横並びに */
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
     .logo {
-      display: block;
-      max-width: 100px;
+      max-width: 60px;
       height: auto;
-      margin: 0 auto 0.5rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    /* 縮小後のスタイル */
+    header.shrink {
+      padding: 0.8rem 1rem;
+    }
+    header.shrink .logo {
+      max-width: 45px;
+    }
+    header.shrink h1 {
+      font-size: 1.4rem;
+    }
+    header.shrink p {
+      font-size: 0.9rem;
+    }
+    header.shrink .font-size-controls {
+      transform: scale(0.85);
     }
 
     /* フォントサイズ切替ピルボタン */
@@ -75,6 +98,7 @@
       background: rgba(255,255,255,0.2);
       padding: 0.3rem;
       border-radius: 999px;
+      transition: transform var(--transition);
     }
     .font-size-controls button {
       background: transparent;
@@ -84,7 +108,7 @@
       color: #fff;
       font-weight: 600;
       cursor: pointer;
-      transition: var(--transition);
+      transition: background var(--transition);
     }
     .font-size-controls button:hover {
       background: rgba(255,255,255,0.3);
@@ -199,18 +223,26 @@
         flex-direction: row;
         gap: 0.5rem;
       }
+      /* モバイルでは縦並びに戻す */
+      .header-top {
+        flex-direction: column;
+        gap: 0.25rem;
+      }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <img
-      src="FGSSmap-icon.png.png"
-      alt="FGSSmap ロゴアイコン"
-      class="logo"
-    >
-    <h1>FGSSmap</h1>
+    <div class="header-top">
+      <img
+        src="FGSSmap-icon.png"
+        alt="FGSSmap ロゴアイコン"
+        class="logo"
+        loading="lazy"
+      >
+      <h1>FGSSmap</h1>
+    </div>
     <p>大学生活の思い出を地図にのせよう</p>
 
     <div class="font-size-controls">
@@ -253,7 +285,8 @@
     <iframe
       src="https://docs.google.com/forms/d/e/1FAIpQLSe0gRhDPJqWI135kZ5fxR1-XkW7IWvzrTaw00cFOyg1KJM36A/viewform?embedded=true"
       loading="lazy"
-      title="思い出投稿フォーム">
+      title="思い出投稿フォーム"
+    >
       読み込んでいます…
     </iframe>
   </section>
@@ -265,12 +298,14 @@
       class="instagram-media"
       data-instgrm-permalink="https://www.instagram.com/palets_fgss/"
       data-instgrm-version="14"
-      style="margin:0 auto;">
+      style="margin:0 auto;"
+    >
       <a
         href="https://www.instagram.com/palets_fgss/?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
         target="_blank"
         rel="noopener"
-        style="color:#000; font-family:Arial,sans-serif; font-size:14px; line-height:17px; text-decoration:none;">
+        style="color:#000; font-family:Arial,sans-serif; font-size:14px; line-height:17px; text-decoration:none;"
+      >
         Palet's (@palets_fgss) • Instagram写真と動画
       </a>
     </blockquote>
@@ -285,8 +320,8 @@
     <iframe
       src="https://www.google.com/maps/d/embed?mid=1nTgYFWkXf1UQHwGZCwdXuRv-aopgUkY&hl=ja&ll=34.12380329442955,131.43323404999998&z=13"
       loading="lazy"
-      title="FGSSmap 地図">
-    </iframe>
+      title="FGSSmap 地図"
+    ></iframe>
   </section>
 
   <script>
@@ -305,17 +340,10 @@
 
       // ヘッダー縮小エフェクト
       const header = document.querySelector('header');
-      let lastScroll = 0;
+      const threshold = 100;
       window.addEventListener('scroll', () => {
-        const current = window.pageYOffset;
-        if (current > lastScroll && current > 100) {
-          header.style.transform = 'scale(0.95)';
-          header.style.opacity = '0.9';
-        } else {
-          header.style.transform = 'scale(1)';
-          header.style.opacity = '1';
-        }
-        lastScroll = current;
+        const scrollY = window.pageYOffset;
+        header.classList.toggle('shrink', scrollY > threshold);
       });
 
       // フォントサイズ切り替え
