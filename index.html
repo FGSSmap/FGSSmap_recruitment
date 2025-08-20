@@ -13,6 +13,7 @@
     rel="stylesheet"
     crossorigin="anonymous"
     referrerpolicy="no-referrer">
+
   <style>
     /* カラーパレット */
     :root {
@@ -44,6 +45,7 @@
       scroll-behavior: smooth;
     }
 
+    /* ヘッダー */
     header {
       background: var(--primary);
       color: #fff;
@@ -53,6 +55,16 @@
       top: 0;
       z-index: 100;
       transition: var(--transition);
+    }
+
+    /* ロゴ */
+    .logo {
+      display: block;
+      max-width: 100px;
+      height: auto;
+      margin: 0 auto 0.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
     /* フォントサイズ切替ピルボタン */
@@ -111,6 +123,7 @@
       color: var(--secondary);
     }
 
+    /* セクション共通 */
     section {
       max-width: 800px;
       margin: 3rem auto;
@@ -150,7 +163,6 @@
       background: var(--secondary);
       border-radius: 2px;
     }
-
     section p {
       font-size: 1rem;
       margin-bottom: 1.5rem;
@@ -164,7 +176,6 @@
       border-radius: 8px;
       box-shadow: 0 2px 12px rgba(0,0,0,0.1);
     }
-
     .instagram-section blockquote.instagram-media {
       background: #FFF;
       border: 0;
@@ -195,8 +206,10 @@
 
   <header>
     <img
-      scr="FGSSmap-icon.png"
-      alt="アイコン"class="logo">
+      src="FGSSmap-icon.png"
+      alt="FGSSmap ロゴアイコン"
+      class="logo"
+    >
     <h1>FGSSmap</h1>
     <p>大学生活の思い出を地図にのせよう</p>
 
@@ -305,7 +318,7 @@
         lastScroll = current;
       });
 
-      // フォントサイズ切り替え（ボタン版）
+      // フォントサイズ切り替え
       const buttons = document.querySelectorAll('.font-size-controls button');
       const applySize = size => {
         document.documentElement
@@ -313,7 +326,6 @@
           .remove('font-small','font-medium','font-large');
         document.documentElement.classList.add(`font-${size}`);
       };
-      // 保存値の適用
       const saved = localStorage.getItem('fontSize') || 'medium';
       applySize(saved);
       buttons.forEach(btn => {
@@ -327,5 +339,6 @@
       });
     });
   </script>
+
 </body>
 </html>
