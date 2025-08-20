@@ -3,7 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FGSSmap 完全版</title>
+
+  <!-- ① タイトル -->
+  <title>FGSSmap | 大学生の思い出を地図で共有</title>
+
+  <!-- ② meta description -->
+  <meta name="description"
+        content="FGSSmapは大学生活の思い出をGoogleマップ上に投稿して共有するサービス。フォームで簡単に思い出を記録し、仲間と思い出を振り返ろう。">
+
+  <!-- ③ canonical -->
+  <link rel="canonical"
+        href="https://fgssmap.github.io/FGSSmap_recruitment/">
+
+  <!-- ④ 構造化データ（JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "FGSSmap",
+    "url": "https://fgssmap.github.io/FGSSmap_recruitment/",
+    "description": "大学生の思い出を地図に投稿・共有できるサービス",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://fgssmap.github.io/FGSSmap_recruitment/?s={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- ⑤ OGP / Twitter Card -->
+  <meta property="og:title"        content="FGSSmap | 大学生の思い出を地図で共有">
+  <meta property="og:description"  content="大学生活の思い出をマップ化して共有できるサービスです。">
+  <meta property="og:image"        content="https://fgssmap.github.io/FGSSmap_recruitment/FGSSmap-icon.png">
+  <meta property="og:url"          content="https://fgssmap.github.io/FGSSmap_recruitment/">
+  <meta property="og:type"         content="website">
+
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="FGSSmap | 大学生の思い出を地図で共有">
+  <meta name="twitter:description" content="大学生活の思い出をGoogleマップ上に投稿して共有するサービス。">
+  <meta name="twitter:image"       content="https://fgssmap.github.io/FGSSmap_recruitment/FGSSmap-icon.png">
+
+  <!-- ───────────────────────────────────────── -->
   <base href="./">
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
@@ -374,7 +414,6 @@
       const threshold  = 100;   // 0〜threshold(px)で最小スケールまで
       const minScale   = 0.85;  // 縮小後のスケール
       const minBgAlpha = 0.6;   // 縮小後の背景α値
-      // 初期背景をRGBAでセット
       header.style.backgroundColor = 'rgba(108, 99, 255, 1)';
       window.addEventListener('scroll', () => {
         const y     = window.pageYOffset;
