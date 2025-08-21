@@ -128,7 +128,6 @@
       transform-origin: top center;
       transition: opacity var(--transition);
     }
-
     .header-top {
       display: flex;
       align-items: center;
@@ -141,7 +140,6 @@
       cursor: pointer;
       transition: transform 0.2s ease;
     }
-
     header h1 {
       font-size: 2rem;
       line-height: 1.2;
@@ -239,7 +237,6 @@
       font-size: 1rem;
       margin-bottom: 1.5rem;
     }
-
     .embed-section iframe,
     .map-section iframe {
       width: 100%;
@@ -259,6 +256,15 @@
       padding: 1rem;
     }
 
+    /* フッター */
+    footer {
+      text-align: center;
+      margin: 3rem auto;
+      padding: 1rem;
+      font-size: 0.875rem;
+      color: var(--text);
+    }
+
     @media (max-width: 600px) {
       .embed-section iframe,
       .map-section iframe {
@@ -274,6 +280,13 @@
       .header-top {
         flex-direction: column;
         gap: 0.25rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      section {
+        transition: none;
+        transform: none;
       }
     }
   </style>
@@ -293,6 +306,7 @@
         class="logo"
         loading="lazy"
         id="js-logo"
+        role="button"
       >
       <h1>FGSSmap</h1>
     </div>
@@ -325,12 +339,13 @@
       src="https://docs.google.com/forms/d/e/1FAIpQLSe0gRhDPJqWI135kZ5fxR1-XkW7IWvzrTaw00cFOyg1KJM36A/viewform?embedded=true"
       loading="lazy"
       title="思い出投稿フォーム"
+      aria-label="大学生活の思い出投稿フォーム"
     ></iframe>
   </section>
 
   <section class="instagram-section">
     <h2>運営団体のご紹介</h2>
-    <p>山口大学国際総合科学部国際総合科学科公認サークルの"Palet's"です！</p>
+    <p>山口大学国際総合科学部国際総合科学科公認サークルの&quot;Palet's&quot;です！</p>
     <blockquote
       class="instagram-media"
       data-instgrm-permalink="https://www.instagram.com/palets_fgss/"
@@ -344,6 +359,9 @@
       >Palet's (@palets_fgss) • Instagram写真と動画</a>
     </blockquote>
     <script async src="https://www.instagram.com/embed.js"></script>
+    <noscript>
+      <a href="https://www.instagram.com/palets_fgss/" target="_blank">Instagramを見る</a>
+    </noscript>
   </section>
 
   <section class="map-section">
@@ -355,8 +373,13 @@
       src="https://www.google.com/maps/d/embed?mid=1nTgYFWkXf1UQHwGZCwdXuRv-aopgUkY&hl=ja&ll=34.12380329442955,131.43323404999998&z=13"
       loading="lazy"
       title="FGSSmap 地図"
+      aria-label="思い出共有マップ"
     ></iframe>
   </section>
+
+  <footer>
+    <p>&copy; 2025 Palet's. All rights reserved.</p>
+  </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
