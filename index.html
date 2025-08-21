@@ -15,6 +15,9 @@
   <link rel="canonical"
         href="https://fgssmap.github.io/FGSSmap_recruitment/">
 
+  <!-- ✅ ファビコン設定 -->
+  <link rel="icon" href="FGSSmap-icon.png.png" type="image/png">
+
   <!-- ④ 構造化データ（JSON-LD） -->
   <script type="application/ld+json">
   {
@@ -53,6 +56,7 @@
     rel="stylesheet"
     crossorigin="anonymous"
     referrerpolicy="no-referrer">
+
   <style>
     :root {
       --primary: #6c63ff;
@@ -302,18 +306,8 @@
   </header>
 
   <div class="fixed-buttons" role="navigation" aria-label="ソーシャルリンク">
-    <a
-      href="https://www.instagram.com/palets_fgss/"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Palet’s Instagram"
-    ><i class="fab fa-instagram"></i></a>
-    <a
-      href="https://www.yamaguchi-u.ac.jp/gss/index.html"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="山口大学国際総合科学部公式サイト"
-    ><i class="fas fa-university"></i></a>
+    <a href="https://www.instagram.com/palets_fgss/" target="_blank" rel="noopener noreferrer" aria-label="Palet’s Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.yamaguchi-u.ac.jp/gss/index.html" target="_blank" rel="noopener noreferrer" aria-label="山口大学国際総合科学部公式サイト"><i class="fas fa-university"></i></a>
   </div>
 
   <section class="intro">
@@ -412,9 +406,9 @@
 
       // ヘッダーの縮小 + 半透明化
       const header     = document.getElementById('js-header');
-      const threshold  = 100;   // 0〜threshold(px)で最小スケールまで
-      const minScale   = 0.85;  // 縮小後のスケール
-      const minBgAlpha = 0.6;   // 縮小後の背景α値
+      const threshold  = 100;
+      const minScale   = 0.85;
+      const minBgAlpha = 0.6;
       header.style.backgroundColor = 'rgba(108, 99, 255, 1)';
       window.addEventListener('scroll', () => {
         const y     = window.pageYOffset;
