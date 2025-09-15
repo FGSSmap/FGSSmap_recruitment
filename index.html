@@ -46,7 +46,7 @@
   <meta name="twitter:description" content="大学生活の思い出をGoogleマップ上に投稿して共有するサービス。">
   <meta name="twitter:image"       content="https://fgssmap.github.io/FGSSmap_recruitment/FGSSmap-icon.png">
 
-  <!-- ───────────────────────────────────────── -->
+  <!-- common assets -->
   <base href="./">
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
@@ -58,236 +58,112 @@
     referrerpolicy="no-referrer">
 
   <style>
-    :root {
-      --primary: #6c63ff;
-      --secondary: #ff6584;
-      --bg: #faf8ff;
-      --section-bg: #ffffff;
-      --section-alt-bg: #f4f0ff;
-      --text: #333;
-      --transition: all 0.3s ease;
+    :root{
+      --primary:#5c6bc0;
+      --accent:#ff7043;
+      --bg:#f9f9f9;
+      --section-bg:#ffffff;
+      --section-alt-bg:#f4f0ff;
+      --text:#333;
+      --muted:#777;
+      --transition: all 0.25s ease;
+      --shadow: 0 6px 20px rgba(20,20,40,0.06);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *{box-sizing:border-box;margin:0;padding:0}
+    html.font-small{font-size:14px}
+    html.font-medium{font-size:16px}
+    html.font-large{font-size:18px}
+
+    body{
+      font-family:'Montserrat',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+      scroll-behavior:smooth;
     }
 
-    html.font-small  { font-size: 14px; }
-    html.font-medium { font-size: 16px; }
-    html.font-large  { font-size: 18px; }
+    /* lightbox */
+    .lightbox-overlay{
+      display:none;
+      position:fixed;inset:0;
+      background:rgba(0,0,0,0.8);
+      justify-content:center;align-items:center;
+      z-index:1100;
+    }
+    .lightbox-overlay.show{display:flex}
+    .lightbox-img{max-width:90%;max-height:90%;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.5)}
+    .lightbox-close{position:absolute;top:1rem;right:1rem;font-size:2rem;color:#fff;background:none;border:none;cursor:pointer}
 
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      scroll-behavior: smooth;
+    /* header */
+    header{
+      background:var(--primary);
+      color:#fff;
+      padding:2rem 1rem;
+      text-align:center;
+      position:sticky;
+      top:0;
+      z-index:1000;
+      transform-origin:top center;
+      transition:transform var(--transition), background-color var(--transition), opacity var(--transition);
     }
+    .header-top{display:flex;align-items:center;justify-content:center;gap:0.5rem}
+    .logo{max-width:60px;height:auto;cursor:pointer;transition:transform .2s ease}
+    header h1{font-size:2rem;line-height:1.2}
+    header p{font-size:1rem;opacity:0.9}
 
-    /* ライトボックス */
-    .lightbox-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      justify-content: center;
-      align-items: center;
-      z-index: 1100;
+    /* font-size controls */
+    .font-size-controls{
+      margin-top:0.5rem;
+      display:inline-flex;
+      gap:0.5rem;
+      background:rgba(255,255,255,0.12);
+      padding:0.3rem;border-radius:999px;
     }
-    .lightbox-overlay.show {
-      display: flex;
+    .font-size-controls button{
+      background:transparent;border:none;padding:0.4rem 0.8rem;border-radius:999px;color:#fff;font-weight:600;cursor:pointer;transition:background var(--transition);
     }
-    .lightbox-img {
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 8px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
-    }
-    .lightbox-close {
-      position: absolute;
-      top: 1rem; right: 1rem;
-      font-size: 2rem;
-      color: #fff;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
+    .font-size-controls button:hover{background:rgba(255,255,255,0.2)}
+    .font-size-controls button.active{background:#fff;color:var(--primary)}
 
-    /* ヘッダー */
-    header {
-      background: var(--primary);
-      color: #fff;
-      padding: 2rem 1rem;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      transform-origin: top center;
-      transition: opacity var(--transition);
+    /* fixed social buttons */
+    .fixed-buttons{
+      position:fixed;top:50%;right:1rem;transform:translateY(-50%);
+      display:flex;flex-direction:column;gap:1rem;z-index:999;
     }
-    .header-top {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
+    .fixed-buttons a{color:var(--primary);font-size:2.2rem;transition:color var(--transition)}
+    .fixed-buttons a:hover{color:var(--accent)}
+
+    /* sections */
+    section{
+      max-width:800px;margin:3rem auto;padding:2rem 1rem;background:var(--section-bg);
+      border-left:4px solid var(--primary);border-radius:8px;
+      box-shadow:var(--shadow);
+      opacity:0;transform:translateY(30px);transition:var(--transition);text-align:center;
     }
-    .logo {
-      max-width: 60px;
-      height: auto;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-    header h1 {
-      font-size: 2rem;
-      line-height: 1.2;
-    }
-    header p {
-      font-size: 1rem;
-      opacity: 0.85;
+    section:nth-of-type(even){background:var(--section-alt-bg)}
+    section.visible{opacity:1;transform:none}
+    section h2{font-size:1.75rem;margin-bottom:1rem;color:var(--primary);position:relative;padding-bottom:0.5rem}
+    section h2::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:50px;height:4px;background:var(--accent);border-radius:2px}
+    section p{font-size:1rem;margin-bottom:1.5rem}
+    .embed-section iframe,.map-section iframe{width:100%;height:600px;border:none;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.1)}
+
+    .instagram-section blockquote.instagram-media{
+      background:#fff;border:0;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.1);
+      margin:0 auto;max-width:540px;width:calc(100% - 2rem);padding:1rem;
     }
 
-    /* フォントサイズ切替 */
-    .font-size-controls {
-      margin-top: 0.5rem;
-      display: inline-flex;
-      gap: 0.5rem;
-      background: rgba(255,255,255,0.2);
-      padding: 0.3rem;
-      border-radius: 999px;
-    }
-    .font-size-controls button {
-      background: transparent;
-      border: none;
-      padding: 0.4rem 0.8rem;
-      border-radius: 999px;
-      color: #fff;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background var(--transition);
-    }
-    .font-size-controls button:hover {
-      background: rgba(255,255,255,0.3);
-    }
-    .font-size-controls button.active {
-      background: #fff;
-      color: var(--primary);
+    footer{
+      text-align:center;margin:3rem auto;padding:1rem;font-size:0.95rem;color:var(--text);
     }
 
-    /* 固定ソーシャルリンク */
-    .fixed-buttons {
-      position: fixed;
-      top: 50%;
-      right: 1rem;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      z-index: 999;
+    @media (max-width:600px){
+      .embed-section iframe,.map-section iframe{height:400px}
+      .fixed-buttons{top:auto;bottom:1rem;right:1rem;transform:none;flex-direction:row;gap:0.5rem}
+      .header-top{flex-direction:column;gap:0.25rem}
     }
-    .fixed-buttons a {
-      color: var(--primary);
-      font-size: 2.4rem;
-      transition: color var(--transition);
-    }
-    .fixed-buttons a:hover {
-      color: var(--secondary);
-    }
-
-    /* セクション共通 */
-    section {
-      max-width: 800px;
-      margin: 3rem auto;
-      padding: 2rem 1rem;
-      background: var(--section-bg);
-      border-left: 4px solid var(--primary);
-      border-radius: 8px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-      opacity: 0;
-      transform: translateY(30px);
-      transition: var(--transition);
-      text-align: center;
-    }
-    section:nth-of-type(even) {
-      background: var(--section-alt-bg);
-    }
-    .visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    section h2 {
-      font-size: 1.75rem;
-      margin-bottom: 1rem;
-      position: relative;
-      color: var(--primary);
-      padding-bottom: 0.5rem;
-    }
-    section h2::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 50%;
-      transform: translateX(-50%);
-      width: 50px; height: 4px;
-      background: var(--secondary);
-      border-radius: 2px;
-    }
-    section p {
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    .embed-section iframe,
-    .map-section iframe {
-      width: 100%;
-      height: 600px;
-      border: none;
-      border-radius: 8px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-    }
-    .instagram-section blockquote.instagram-media {
-      background: #FFF;
-      border: 0;
-      border-radius: 8px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-      margin: 0 auto;
-      max-width: 540px;
-      width: calc(100% - 2rem);
-      padding: 1rem;
-    }
-
-    /* フッター */
-    footer {
-      text-align: center;
-      margin: 3rem auto;
-      padding: 1rem;
-      font-size: 0.875rem;
-      color: var(--text);
-    }
-
-    @media (max-width: 600px) {
-      .embed-section iframe,
-      .map-section iframe {
-        height: 400px;
-      }
-      .fixed-buttons {
-        top: auto;
-        bottom: 1rem;
-        transform: none;
-        flex-direction: row;
-        gap: 0.5rem;
-      }
-      .header-top {
-        flex-direction: column;
-        gap: 0.25rem;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      section {
-        transition: none;
-        transform: none;
-      }
+    @media (prefers-reduced-motion:reduce){
+      section{transition:none;transform:none}
     }
   </style>
 </head>
@@ -345,7 +221,7 @@
 
   <section class="instagram-section">
     <h2>運営団体のご紹介</h2>
-    <p>山口大学国際総合科学部国際総合科学科公認サークルの&quot;Palet's&quot;です！</p>
+    <p>山口大学国際総合科学部国際総合科学科公認サークルの "Palet's" です！</p>
     <blockquote
       class="instagram-media"
       data-instgrm-permalink="https://www.instagram.com/palets_fgss/"
@@ -432,14 +308,14 @@
       const threshold  = 100;
       const minScale   = 0.85;
       const minBgAlpha = 0.6;
-      header.style.backgroundColor = 'rgba(108, 99, 255, 1)';
+      header.style.backgroundColor = 'rgba(92, 107, 192, 1)';
       window.addEventListener('scroll', () => {
         const y     = window.pageYOffset;
         const ratio = Math.min(y / threshold, 1);
         const scale = 1 - (1 - minScale) * ratio;
         const alpha = 1 - (1 - minBgAlpha) * ratio;
         header.style.transform        = `scale(${scale})`;
-        header.style.backgroundColor  = `rgba(108, 99, 255, ${alpha})`;
+        header.style.backgroundColor  = `rgba(92, 107, 192, ${alpha})`;
       });
     });
   </script>
