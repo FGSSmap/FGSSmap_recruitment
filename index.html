@@ -4,21 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- ① タイトル -->
   <title>FGSSmap | 大学生の思い出を地図で共有</title>
-
-  <!-- ② meta description -->
-  <meta name="description"
-        content="FGSSmapは大学生活の思い出をGoogleマップ上に投稿して共有するサービス。フォームで簡単に思い出を記録し、仲間と思い出を振り返ろう。">
-
-  <!-- ③ canonical -->
-  <link rel="canonical"
-        href="https://fgssmap.github.io/FGSSmap_recruitment/">
-
-  <!-- ✅ ファビコン設定 -->
+  <meta name="description" content="FGSSmapは大学生活の思い出をGoogleマップ上に投稿して共有するサービス。フォームで簡単に思い出を記録し、仲間と思い出を振り返ろう。">
+  <link rel="canonical" href="https://fgssmap.github.io/FGSSmap_recruitment/">
   <link rel="icon" href="FGSSmap-icon.png.png" type="image/png">
 
-  <!-- ④ 構造化データ（JSON-LD） -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -34,7 +24,6 @@
   }
   </script>
 
-  <!-- ⑤ OGP / Twitter Card -->
   <meta property="og:title"        content="FGSSmap | 大学生の思い出を地図で共有">
   <meta property="og:description"  content="大学生活の思い出をマップ化して共有できるサービスです。">
   <meta property="og:image"        content="https://fgssmap.github.io/FGSSmap_recruitment/FGSSmap-icon.png">
@@ -46,16 +35,9 @@
   <meta name="twitter:description" content="大学生活の思い出をGoogleマップ上に投稿して共有するサービス。">
   <meta name="twitter:image"       content="https://fgssmap.github.io/FGSSmap_recruitment/FGSSmap-icon.png">
 
-  <!-- common assets -->
   <base href="./">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
-    rel="stylesheet">
-  <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    rel="stylesheet"
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous" referrerpolicy="no-referrer">
 
   <style>
     :root{
@@ -95,35 +77,73 @@
     .lightbox-img{max-width:90%;max-height:90%;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.5)}
     .lightbox-close{position:absolute;top:1rem;right:1rem;font-size:2rem;color:#fff;background:none;border:none;cursor:pointer}
 
-    /* header */
+    /* header: left logo/title, right controls */
     header{
       background:var(--primary);
       color:#fff;
-      padding:2rem 1rem;
-      text-align:center;
+      padding:0.75rem 1rem;
       position:sticky;
       top:0;
       z-index:1000;
       transform-origin:top center;
       transition:transform var(--transition), background-color var(--transition), opacity var(--transition);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     }
-    .header-top{display:flex;align-items:center;justify-content:center;gap:0.5rem}
-    .logo{max-width:60px;height:auto;cursor:pointer;transition:transform .2s ease}
-    header h1{font-size:2rem;line-height:1.2}
-    header p{font-size:1rem;opacity:0.9}
 
-    /* font-size controls */
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      max-width:1100px;
+      margin:0 auto;
+    }
+
+    .left-group{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .logo{
+      width:44px;height:44px;object-fit:contain;border-radius:6px;cursor:pointer;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    }
+
+    /* Title uses poppy Fredoka only for the site title */
+    .site-title{
+      font-family: 'Fredoka', 'Montserrat', sans-serif;
+      font-weight:700;
+      font-size:1.05rem;
+      color:#fff;
+      letter-spacing:0.4px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .header-sub{
+      font-size:0.95rem;
+      opacity:0.95;
+      margin-left:8px;
+      color: rgba(255,255,255,0.95);
+    }
+
+    /* right controls (font size buttons) */
+    .right-group{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
     .font-size-controls{
-      margin-top:0.5rem;
       display:inline-flex;
-      gap:0.5rem;
+      gap:0.4rem;
       background:rgba(255,255,255,0.12);
-      padding:0.3rem;border-radius:999px;
+      padding:0.25rem;border-radius:999px;
     }
     .font-size-controls button{
-      background:transparent;border:none;padding:0.4rem 0.8rem;border-radius:999px;color:#fff;font-weight:600;cursor:pointer;transition:background var(--transition);
+      background:transparent;border:none;padding:0.35rem 0.7rem;border-radius:999px;color:#fff;font-weight:600;cursor:pointer;transition:background var(--transition);
     }
-    .font-size-controls button:hover{background:rgba(255,255,255,0.2)}
+    .font-size-controls button:hover{background:rgba(255,255,255,0.18)}
     .font-size-controls button.active{background:#fff;color:var(--primary)}
 
     /* fixed social buttons */
@@ -135,33 +155,42 @@
     .fixed-buttons a:hover{color:var(--accent)}
 
     /* sections */
+    main{max-width:1100px;margin:1.5rem auto;padding:0 1rem}
     section{
-      max-width:800px;margin:3rem auto;padding:2rem 1rem;background:var(--section-bg);
+      max-width:900px;margin:2rem auto;padding:1.6rem;background:var(--section-bg);
       border-left:4px solid var(--primary);border-radius:8px;
       box-shadow:var(--shadow);
-      opacity:0;transform:translateY(30px);transition:var(--transition);text-align:center;
+      opacity:0;transform:translateY(24px);transition:var(--transition);text-align:center;
     }
     section:nth-of-type(even){background:var(--section-alt-bg)}
     section.visible{opacity:1;transform:none}
-    section h2{font-size:1.75rem;margin-bottom:1rem;color:var(--primary);position:relative;padding-bottom:0.5rem}
-    section h2::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:50px;height:4px;background:var(--accent);border-radius:2px}
-    section p{font-size:1rem;margin-bottom:1.5rem}
-    .embed-section iframe,.map-section iframe{width:100%;height:600px;border:none;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.1)}
+    section h2{font-size:1.6rem;margin-bottom:0.8rem;color:var(--primary);position:relative;padding-bottom:0.4rem}
+    section h2::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:40px;height:4px;background:var(--accent);border-radius:2px}
+    section p{font-size:1rem;margin-bottom:1rem}
+    .embed-section iframe,.map-section iframe{width:100%;height:560px;border:none;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.08)}
 
     .instagram-section blockquote.instagram-media{
-      background:#fff;border:0;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.1);
+      background:#fff;border:0;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.08);
       margin:0 auto;max-width:540px;width:calc(100% - 2rem);padding:1rem;
     }
 
     footer{
-      text-align:center;margin:3rem auto;padding:1rem;font-size:0.95rem;color:var(--text);
+      text-align:center;margin:2.5rem auto;padding:1rem;font-size:0.95rem;color:var(--text);
     }
 
-    @media (max-width:600px){
-      .embed-section iframe,.map-section iframe{height:400px}
-      .fixed-buttons{top:auto;bottom:1rem;right:1rem;transform:none;flex-direction:row;gap:0.5rem}
-      .header-top{flex-direction:column;gap:0.25rem}
+    @media (max-width:900px){
+      .fixed-buttons{top:auto;bottom:1rem;right:1rem;transform:none;flex-direction:row;gap:0.6rem}
+      .nav{padding:0.6rem}
     }
+    @media (max-width:600px){
+      .embed-section iframe,.map-section iframe{height:420px}
+      .left-group{gap:8px}
+      .site-title{font-size:1rem}
+      .logo{width:40px;height:40px}
+      .font-size-controls{display:none} /* small screens show compact toggle if desired */
+      header{padding:0.6rem}
+    }
+
     @media (prefers-reduced-motion:reduce){
       section{transition:none;transform:none}
     }
@@ -174,86 +203,63 @@
     <img class="lightbox-img" src="" alt="拡大画像">
   </div>
 
-  <header id="js-header">
-    <div class="header-top">
-      <img
-        src="FGSSmap-icon.png.png"
-        alt="FGSSmap ロゴアイコン"
-        class="logo"
-        loading="lazy"
-        id="js-logo"
-        role="button"
-      >
-      <h1>FGSSmap</h1>
-    </div>
-    <p>大学生活の思い出を地図にのせよう</p>
+  <header id="js-header" role="banner">
+    <div class="nav">
+      <div class="left-group" aria-hidden="false">
+        <img src="FGSSmap-icon.png.png" alt="FGSSmap ロゴアイコン" class="logo" loading="lazy" id="js-logo" role="button">
+        <div>
+          <div class="site-title">FGSSmap</div>
+          <div class="header-sub" aria-hidden="true">大学生活の思い出を地図にのせよう</div>
+        </div>
+      </div>
 
-    <div class="font-size-controls">
-      <button data-size="small">小</button>
-      <button data-size="medium" class="active">中</button>
-      <button data-size="large">大</button>
+      <div class="right-group" aria-hidden="false">
+        <div class="font-size-controls" role="toolbar" aria-label="フォントサイズ">
+          <button data-size="small" aria-pressed="false">小</button>
+          <button data-size="medium" class="active" aria-pressed="true">中</button>
+          <button data-size="large" aria-pressed="false">大</button>
+        </div>
+      </div>
     </div>
   </header>
 
   <div class="fixed-buttons" role="navigation" aria-label="ソーシャルリンク">
-    <a href="https://www.instagram.com/palets_fgss/" target="_blank" rel="noopener noreferrer" aria-label="Palet’s Instagram"><i class="fab fa-instagram"></i></a>
-    <a href="https://www.yamaguchi-u.ac.jp/gss/index.html" target="_blank" rel="noopener noreferrer" aria-label="山口大学国際総合科学部公式サイト"><i class="fas fa-university"></i></a>
+    <a href="https://www.instagram.com/palets_fgss/" target="_blank" rel="noopener noreferrer" aria-label="Palet’s Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+    <a href="https://www.yamaguchi-u.ac.jp/gss/index.html" target="_blank" rel="noopener noreferrer" aria-label="山口大学国際総合科学部公式サイト"><i class="fas fa-university" aria-hidden="true"></i></a>
   </div>
 
-  <section class="intro">
-    <h2>FGSSmapへようこそ</h2>
-    <p>
-      ここではあなたの大学生活で訪れた場所や思い出をフォームから投稿し、
-      地図上に記録します。みなさんの記憶が一つの地図となって広がっていきます。
-      キャンパス周辺から、世界各国まで思い出のピンが広がることを願っています！
-    </p>
-  </section>
+  <main>
+    <section class="intro">
+      <h2>FGSSmapへようこそ</h2>
+      <p>
+        ここではあなたの大学生活で訪れた場所や思い出をフォームから投稿し、
+        地図上に記録します。みなさんの記憶が一つの地図となって広がっていきます。
+      </p>
+    </section>
 
-  <section class="embed-section">
-    <h2>思い出を投稿する</h2>
-    <iframe
-      src="https://docs.google.com/forms/d/e/1FAIpQLSe0gRhDPJqWI135kZ5fxR1-XkW7IWvzrTaw00cFOyg1KJM36A/viewform?embedded=true"
-      loading="lazy"
-      title="思い出投稿フォーム"
-      aria-label="大学生活の思い出投稿フォーム"
-    ></iframe>
-  </section>
+    <section class="embed-section">
+      <h2>思い出を投稿する</h2>
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe0gRhDPJqWI135kZ5fxR1-XkW7IWvzrTaw00cFOyg1KJM36A/viewform?embedded=true" loading="lazy" title="思い出投稿フォーム" aria-label="大学生活の思い出投稿フォーム"></iframe>
+    </section>
 
-  <section class="instagram-section">
-    <h2>運営団体のご紹介</h2>
-    <p>山口大学国際総合科学部国際総合科学科公認サークルの "Palet's" です！</p>
-    <blockquote
-      class="instagram-media"
-      data-instgrm-permalink="https://www.instagram.com/palets_fgss/"
-      data-instgrm-version="14"
-      style="margin:0 auto;"
-    >
-      <a
-        href="https://www.instagram.com/palets_fgss/?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-        target="_blank"
-        rel="noopener"
-      >Palet's (@palets_fgss) • Instagram写真と動画</a>
-    </blockquote>
-    <script async src="https://www.instagram.com/embed.js"></script>
-    <noscript>
-      <a href="https://www.instagram.com/palets_fgss/" target="_blank">Instagramを見る</a>
-    </noscript>
-  </section>
+    <section class="instagram-section">
+      <h2>運営団体のご紹介</h2>
+      <p>山口大学国際総合科学部国際総合科学科公認サークルの "Palet's" です！</p>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/palets_fgss/" data-instgrm-version="14" style="margin:0 auto;">
+        <a href="https://www.instagram.com/palets_fgss/" target="_blank" rel="noopener">Palet's (@palets_fgss) • Instagram写真と動画</a>
+      </blockquote>
+      <script async src="https://www.instagram.com/embed.js"></script>
+      <noscript><a href="https://www.instagram.com/palets_fgss/" target="_blank">Instagramを見る</a></noscript>
+    </section>
 
-  <section class="map-section">
-    <h2>FGSSmap</h2>
-    <p>
-      みなさんの思い出の場所は以下の地図上に記録され、世界中に共有されます！
-    </p>
-    <iframe
-      src="https://www.google.com/maps/d/embed?mid=1nTgYFWkXf1UQHwGZCwdXuRv-aopgUkY&hl=ja&ll=34.12380329442955,131.43323404999998&z=13"
-      loading="lazy"
-      title="FGSSmap 地図"
-      aria-label="思い出共有マップ"
-    ></iframe>
-  </section>
+    <section class="map-section">
+      <h2>FGSSmap</h2>
+      <p>みなさんの思い出の場所は以下の地図上に記録され、世界中に共有されます！</p>
+      <iframe src="https://www.google.com/maps/d/embed?mid=1nTgYFWkXf1UQHwGZCwdXuRv-aopgUkY&hl=ja&ll=34.12380329442955,131.43323404999998&z=13" loading="lazy" title="FGSSmap 地図" aria-label="思い出共有マップ"></iframe>
+    </section>
+  </main>
 
-  <footer>
+  <footer role="contentinfo">
     <p>&copy; 2025 Palet's. All rights reserved.</p>
   </footer>
 
@@ -276,6 +282,8 @@
       const applySize = size => {
         document.documentElement.classList.remove('font-small','font-medium','font-large');
         document.documentElement.classList.add(`font-${size}`);
+        // update aria-pressed
+        buttons.forEach(b=> b.setAttribute('aria-pressed', b.dataset.size === size ? 'true' : 'false'));
       };
       const saved = localStorage.getItem('fontSize') || 'medium';
       applySize(saved);
@@ -287,6 +295,9 @@
           applySize(btn.dataset.size);
           localStorage.setItem('fontSize', btn.dataset.size);
         });
+        btn.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+        });
       });
 
       // ライトボックス
@@ -294,11 +305,14 @@
       const lightbox  = document.getElementById('lightbox');
       const lightboxImg  = lightbox.querySelector('.lightbox-img');
       const closeBtn     = lightbox.querySelector('.lightbox-close');
-      logo.addEventListener('click', () => {
-        lightboxImg.src = logo.src;
-        lightbox.classList.add('show');
-      });
-      closeBtn.addEventListener('click', () => lightbox.classList.remove('show'));
+      if (logo) {
+        logo.addEventListener('click', () => {
+          lightboxImg.src = logo.src;
+          lightbox.classList.add('show');
+          closeBtn.focus();
+        });
+      }
+      if (closeBtn) closeBtn.addEventListener('click', () => lightbox.classList.remove('show'));
       lightbox.addEventListener('click', e => {
         if (e.target === lightbox) lightbox.classList.remove('show');
       });
@@ -306,8 +320,8 @@
       // ヘッダーの縮小 + 半透明化
       const header     = document.getElementById('js-header');
       const threshold  = 100;
-      const minScale   = 0.85;
-      const minBgAlpha = 0.6;
+      const minScale   = 0.92;
+      const minBgAlpha = 0.8;
       header.style.backgroundColor = 'rgba(92, 107, 192, 1)';
       window.addEventListener('scroll', () => {
         const y     = window.pageYOffset;
